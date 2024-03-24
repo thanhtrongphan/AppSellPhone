@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "964397708360",
+    "firebase_url": "https://sellphone-e966d-default-rtdb.firebaseio.com",
+    "project_id": "sellphone-e966d",
+    "storage_bucket": "sellphone-e966d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964397708360:android:0e476821cf92922edad47d",
+        "android_client_info": {
+          "package_name": "com.example.appsellphone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC49qqTAmCqTfF54fNWMmp0Qng7Uwbipzk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964397708360:android:5e541eebe2ceee27dad47d",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC49qqTAmCqTfF54fNWMmp0Qng7Uwbipzk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
