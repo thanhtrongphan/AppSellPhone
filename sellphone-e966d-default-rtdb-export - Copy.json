@@ -1,0 +1,121 @@
+{
+  "Categories": {
+    "Category_id_1": {
+      "image": "image",
+      "name": "Iphone"
+    },
+    "Category_id_2": {
+      "image": "image",
+      "name": "Samsung"
+    },
+    "Category_id_3": {
+      "image": "image",
+      "name": "Oppo"
+    },
+    "Category_id_4": {
+      "image": "image",
+      "name": "Xiaomi"
+    },
+    "Category_id_5": {
+      "image": "image",
+      "name": "Nokia"
+    }
+  },
+  "Order_items": {
+    "Order_item_id_1": {
+      "Order_id": "Order_id_1",
+      "Product_id": "Product_id_1",
+      "count": 2,
+      "price": 200
+    }
+  },
+  "Orders": {
+    "Order_id_1": {
+      "User_id": "User_id_1",
+      "is_payment": 0,
+      "total": 200
+    }
+  },
+  "Products": {
+    "Product_id_1": {
+      "Category_id": "Category_id_1",
+      "detail": "Iphone 13",
+      "image": "image",
+      "name": "Iphone 13",
+      "price": 14900000
+    },
+    "Product_id_2": {
+      "Category_id": "Category_id_1",
+      "detail": "Iphone 15 Pro Max",
+      "image": "image",
+      "name": "Iphone 15 Pro Max",
+      "price": 30990000
+    },
+    "Product_id_3": {
+      "Category_id": "Category_id_2",
+      "detail": "Samsung Galaxy S24 5G",
+      "image": "image",
+      "name": "Samsung Galaxy S24 5G",
+      "price": 20690000
+    },
+    "Product_id_4": {
+      "Category_id": "Category_id_2",
+      "detail": "Samsung Galaxy A25 5G",
+      "image": "image",
+      "name": "Samsung Galaxy A25 5G",
+      "price": 6490000
+    },
+    "Product_id_5": {
+      "Category_id": "Category_id_3",
+      "detail": "OPPO Reno11 5G",
+      "image": "image",
+      "name": "OPPO Reno11 5G",
+      "price": 10690000
+    },
+    "Product_id_6": {
+      "Category_id": "Category_id_3",
+      "detail": "OPPO A57 128GB",
+      "image": "image",
+      "name": "OPPO A57 128GB",
+      "price": 4390000
+    },
+    "Product_id_7": {
+      "Category_id": "Category_id_4",
+      "detail": "Xiaomi 14 5G",
+      "image": "image",
+      "name": "Xiaomi 14 5G",
+      "price": 19990000
+    },
+    "Product_id_8": {
+      "Category_id": "Category_id_4",
+      "detail": "Xiaomi Redmi Note 13 Pro+ 5G",
+      "image": "image",
+      "name": "Xiaomi Redmi Note 13 Pro+ 5G",
+      "price": 10490000
+    },
+    "Product_id_9": {
+      "Category_id": "Category_id_5",
+      "detail": "Nokia 8210 4G",
+      "image": "image",
+      "name": "Nokia 8210 4G",
+      "price": 1590000
+    },
+    "Product_id_10": {
+      "Category_id": "Category_id_5",
+      "detail": "Nokia 105 4G Pro",
+      "image": "image",
+      "name": "Nokia 105 4G Pro",
+      "price": 680000
+    }
+  },
+  "Users": {
+    "User_id_1": {
+      "address": "123 Main Street",
+      "email": "john@gmail.com",
+      "firstname": "John",
+      "lastname": "Doe",
+      "mobile": 123465789,
+      "password": 123
+    }
+  }
+}
