@@ -21,7 +21,7 @@ public class ShowProductActivity extends AppCompatActivity {
         ArrayList<HashMap<String,String>> items = new ArrayList<>();
         HashMap<String,String> item = new HashMap<>();
         item.put("image","ic_shoppingcart");
-        item.put("name","Product 1");
+        item.put("name","Product 123");
         items.add(item);
         item.put("image","ic_shoppingcart");
         item.put("name","Product 1");
