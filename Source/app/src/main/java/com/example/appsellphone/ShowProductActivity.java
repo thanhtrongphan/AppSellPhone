@@ -27,7 +27,7 @@ public class ShowProductActivity extends AppCompatActivity {
         item.put("name","Product 1");
         items.add(item);
         item.put("image","ic_shoppingcart");
-        item.put("name","Product 1");
+        item.put("name","Product 2");
         items.add(item);
         item.put("image","ic_shoppingcart");
         item.put("name","Product 1");
