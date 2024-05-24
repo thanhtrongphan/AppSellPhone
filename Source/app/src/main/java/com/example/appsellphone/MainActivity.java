@@ -11,6 +11,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import function.Database;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
@@ -18,15 +20,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView = findViewById(R.id.tv_1);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Categories/Category_id_1/name");
-        myRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                textView.setText(task.getResult().getValue().toString());
-            } else {
-                textView.setText("Failed to read value.");
-            }
-        });
+        // create database from class Database
+        Database database = new Database(this);
+
+
+
     }
 }
