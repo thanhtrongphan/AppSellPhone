@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -14,16 +15,19 @@ import com.example.appsellphone.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder>{
 
 
     private Context context;
-    private ArrayList<HashMap<String,String>> items;
-    public MenuAdapter(Context context, ArrayList<HashMap<String, String>> items) {
+    private List<String> categories;
+
+    public MenuAdapter(Context context, List<String> categories) {
         this.context = context;
-        this.items = items;
+        this.categories = categories;
     }
+
     @NonNull
     @Override
     public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,27 +39,23 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
-        HashMap<String,String> item = items.get(position);
+        String category = categories.get(position);
         // set src for imageButton
-        String imageName = item.get("image");
-        int resId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
-        holder.imageButton.setImageResource(resId);
-        String nameText = item.get("name");
-        holder.textView.setText(nameText);
+        holder.btn.setText(category);
+
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return categories.size();
     }
 
     public class MenuViewHolder extends RecyclerView.ViewHolder {
-        ImageButton imageButton;
-        TextView textView;
+        Button btn;
+
         public MenuViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageButton = itemView.findViewById(R.id.showProduct_itemMenu_imageButton);
-            textView = itemView.findViewById(R.id.showProduct_itemMenu_textView);
+            btn = itemView.findViewById(R.id.bt_item_menu);
         }
     }
 }

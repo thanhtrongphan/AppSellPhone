@@ -2,6 +2,7 @@ package com.example.appsellphone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -22,8 +23,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // create database from class Database
         Database database = new Database(this);
+        // delete old database and create new database
 
-
+        Intent intent = new Intent(MainActivity.this, ShowProductActivity.class);
+        startActivity(intent);
 
     }
 }
