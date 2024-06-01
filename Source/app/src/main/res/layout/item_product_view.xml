@@ -1,30 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal">
+    android:layout_width="175dp"
+    android:background="@drawable/grey_background"
+    android:elevation="3dp"
+    android:layout_margin="8dp"
+    android:layout_height="200dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    >
+
     <ImageView
+        android:id="@+id/pic"
+        android:layout_width="175dp"
+        android:layout_height="155dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pic1" />
 
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/imv_item_product_image"
-        android:src="@mipmap/iphone_category_foreground"
 
-        />
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:background="@drawable/white_background2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pic"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
+        android:id="@+id/titleTxt"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:id="@+id/tv_item_product_name"
-        android:text="iphone"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:singleLine="true"
+        android:text="title"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view6" />
 
-    <Button
-        android:id="@+id/btn_item_product_detail"
+    <TextView
+        android:id="@+id/feeTxt"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:backgroundTint="#2774FD"
-        android:layout_gravity="right|fill"
-        android:text="Xem chi tiết"
-/>
+        android:layout_height="wrap_content"
+        android:text="$123"
+        android:textColor="@color/red"
+        app:layout_constraintTop_toBottomOf="@+id/titleTxt"
+        app:layout_constraintStart_toStartOf="@+id/titleTxt" />
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

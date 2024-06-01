@@ -17,13 +17,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import model.Category;
+
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder>{
 
 
     private Context context;
-    private List<String> categories;
+    private List<Category> categories;
 
-    public MenuAdapter(Context context, List<String> categories) {
+    public MenuAdapter(Context context, List<Category> categories) {
         this.context = context;
         this.categories = categories;
     }
@@ -39,9 +41,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
-        String category = categories.get(position);
+        Category category = categories.get(position);
         // set src for imageButton
-        holder.btn.setText(category);
+        holder.btn.setText(category.getName());
 
     }
 

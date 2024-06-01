@@ -1,6 +1,7 @@
 package adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -10,7 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appsellphone.DetailProduct;
 import com.example.appsellphone.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -37,16 +40,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = products.get(position);
-        // set image for imageView
-        String image = product.getImage();
-
-        holder.textView.setText(product.getName());
-        holder.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // go to detail activity
-            }
+        holder.titleTxt.setText(product.getName());
+        String url = product.getImage();
+        Picasso.get().load(url).into(holder.pic);
+        holder.price.setText(product.getPrice() + " VND");
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.itemView.getContext(), DetailProduct.class);
+            intent.putExtra("object", product);
+            holder.itemView.getContext().startActivity(intent);
         });
+
     }
 
     @Override
@@ -56,14 +59,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
-        TextView textView;
-        Button button;
+        TextView titleTxt;
+        ImageView pic;
+        TextView price;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imv_item_product_image);
-            textView = itemView.findViewById(R.id.tv_item_product_name);
-            button = itemView.findViewById(R.id.btn_item_product_detail);
+            titleTxt = itemView.findViewById(R.id.titleTxt);
+            pic = itemView.findViewById(R.id.pic);
+            price = itemView.findViewById(R.id.feeTxt);
         }
     }
 }

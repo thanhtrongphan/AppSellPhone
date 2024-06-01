@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Category;
 import model.Product;
 
 public class Database extends SQLiteOpenHelper {
@@ -51,16 +52,18 @@ public class Database extends SQLiteOpenHelper {
             db.execSQL(INSERT_CATEGORY);
         }
         String[][] products = {
-                {"1", "5", "Nokia 8210 4G", "1", "1590000", "Nokia 8210 4G"},
-                {"2", "4", "Xiaomi Redmi Note 13 Pro+ 5G", "2", "10490000", "Xiaomi Redmi Note 13 Pro+ 5G"},
-                {"3", "4", "Xiaomi 14 5G", "3", "19990000", "Xiaomi 14 5G"},
-                {"4", "3", "OPPO A57 128GB", "4", "4390000", "OPPO A57 128GB"},
-                {"5", "3", "OPPO Reno11 5G", "5", "10690000", "OPPO Reno11 5G"},
-                {"6", "2", "Samsung Galaxy A25 5G", "6", "6490000", "Samsung Galaxy A25 5G"},
-                {"7", "2", "Samsung Galaxy S24 5G", "7", "20690000", "Samsung Galaxy S24 5G"},
-                {"8", "1", "Iphone 15 Pro Max", "8", "30990000", "Iphone 15 Pro Max"},
-                {"9", "5", "Nokia 105 4G Pro", "9", "680000", "Nokia 105 4G Pro"},
-                {"10", "1", "Iphone 13", "10", "14900000", "Iphone 13"}
+                {"1", "5", "Nokia 8210 4G",
+                        "https://i.imgur.com/ESv4M5w.jpg"
+                        , "1590000", "Nokia 8210 4G"},
+                {"2", "4", "Xiaomi Redmi Note 13 Pro+ 5G", "https://i.imgur.com/r6tXPHP.jpg", "10490000", "Xiaomi Redmi Note 13 Pro+ 5G"},
+                {"3", "4", "Xiaomi 14 5G", "https://i.imgur.com/cF7yxUT.jpg", "19990000", "Xiaomi 14 5G"},
+                {"4", "3", "OPPO A57 128GB", "https://i.imgur.com/kFnN6TF.jpg", "4390000", "OPPO A57 128GB"},
+                {"5", "3", "OPPO Reno11 5G", "https://i.imgur.com/gTWTzCR.jpg", "10690000", "OPPO Reno11 5G"},
+                {"6", "2", "Samsung Galaxy A25 5G", "https://i.imgur.com/BBKvOv2.jpg", "6490000", "Samsung Galaxy A25 5G"},
+                {"7", "2", "Samsung Galaxy S24 5G", "https://i.imgur.com/KjWwrtU.jpg", "20690000", "Samsung Galaxy S24 5G"},
+                {"8", "1", "Iphone 15 Pro Max", "https://i.imgur.com/6xFPwEj.jpg", "30990000", "Iphone 15 Pro Max"},
+                {"9", "5", "Nokia 105 4G Pro", "https://i.imgur.com/Rwo0eQu.png", "680000", "Nokia 105 4G Pro"},
+                {"10", "1", "Iphone 13", "https://i.imgur.com/XX3aDph.jpg", "14900000", "Iphone 13"}
         };
 
         for (String[] product : products) {
@@ -74,17 +77,17 @@ public class Database extends SQLiteOpenHelper {
 
 
     }
-    public List<String> getCategories() {
-        List<String> categories = new ArrayList<>();
+    public List<Category> getCategories() {
+        List<Category> categoryList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT " + CATEGORY_NAME + " FROM " + TABLE_CATEGORIES, null);
+        Cursor cursor = db.rawQuery("SELECT *"  + " FROM " + TABLE_CATEGORIES, null);
         if (cursor.moveToFirst()) {
             do {
-                categories.add(cursor.getString(0));
+                categoryList.add(new Category(cursor.getString(0), cursor.getString(1), cursor.getString(2)));
             } while (cursor.moveToNext());
         }
         cursor.close();
-        return categories;
+        return categoryList;
     }
     public List<Product> getProducts(){
         List<Product> products = new ArrayList<>();
