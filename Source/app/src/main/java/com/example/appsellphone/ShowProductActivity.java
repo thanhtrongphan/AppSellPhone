@@ -1,13 +1,10 @@
 package com.example.appsellphone;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -18,10 +15,16 @@ import function.Database;
 import model.Product;
 
 
+
+
+
+
+
+
 public class ShowProductActivity extends AppCompatActivity {
     RecyclerView menuRecyclerView;
+    TextView textView;
     RecyclerView productRecyclerView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,19 +35,21 @@ public class ShowProductActivity extends AppCompatActivity {
         setMenu();
         setProduct();
     }
-    public void setMenu(){
+
+    public void setMenu() {
         Database database = new Database(this);
         List<String> categoriesName = database.getCategories();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         menuRecyclerView.setLayoutManager(linearLayoutManager);
-        menuRecyclerView.setAdapter(new MenuAdapter(this,categoriesName));
+        menuRecyclerView.setAdapter(new MenuAdapter(this, categoriesName));
     }
-    public void setProduct(){
+
+    public void setProduct() {
         Database database = new Database(this);
         List<Product> products = database.getProducts();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         productRecyclerView.setLayoutManager(linearLayoutManager);
-        productRecyclerView.setAdapter(new ProductAdapter(products,this));
+        productRecyclerView.setAdapter(new ProductAdapter(products, this));
     }
-
 }
+
