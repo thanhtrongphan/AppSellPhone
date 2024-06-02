@@ -14,17 +14,51 @@ import model.Product;
 public class Database extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "my_database.db";
     private static final int DATABASE_VERSION = 1;
+    // table categories
     private static final String TABLE_CATEGORIES = "categories";
     private static final String TABLE_PRODUCTS = "products";
     private static final String KEY_CATEGORY_ID = "id";
     private static final String CATEGORY_NAME = "name";
     private static final String CATEGORY_IMAGE = "image";
+    // TABLE PRODUCT
     private static final String KEY_PRODUCT_ID = "id";
     private static final String PRODUCT_CATEGORY_ID = "category_id";
     private static final String PRODUCT_NAME = "name";
     private static final String PRODUCT_IMAGE = "image";
     private static final String PRODUCT_PRICE = "price";
     private static final String PRODUCT_DETAIL = "detail";
+    // table account
+    private static final String TABLE_ACCOUNT = "accounts";
+    private static final String KEY_ACCOUNT_ID = "id";
+    private static final String ACCOUNT_EMAIL = "email";
+    private static final String ACCOUNT_USERNAME = "username";
+    private static final String ACCOUNT_PASSWORD = "password";
+    // table order
+    private static final String TABLE_ORDER = "orders";
+    private static final String KEY_ORDER_ID = "id";
+    private static final String ORDER_ACCOUNT_ID = "account_id";
+    private static final String ORDER_ISPAYMENT = "isPayment";
+    private static final String ORDER_TOTAL = "total";
+    private static final String ORDER_PHONE = "phone";
+    private static final String ORDER_ADDRESS = "address";
+    // table order item
+    private static final String TABLE_ORDER_ITEM = "order_items";
+    private static final String KEY_ORDERITEM_ID = "id";
+    private static final String ORDERITEM_ORDER_ID = "order_id";
+    private static final String ORDERITEM_PRODUCT_ID = "product_id";
+    private static final String ORDERITEM_COUNT = "count";
+    private static final String ORDERITEM_PRICE = "price";
+    // TABLE CART ITEM
+    private static final String TABLE_CART_ITEM = "cart_items";
+    private static final String KEY_CART_ITEM_ID = "id";
+    private static final String CART_ITEM_PRODUCT_ID= "product_id";
+    private static final String CART_ITEM_COUNT = "count";
+    private static final String CART_SESSION_ID = "session_id";
+    // TABLE SESSION_SHOPPING
+    private static final String TABLE_SESSION_SHOPPING = "session_shopping";
+    private static final String KEY_SESSION_ID = "id";
+    private static final String SESSION_USER_ID = "user_id";
+    private static final String SESSION_TOTAL = "TOTAL";
     public Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -37,6 +71,7 @@ public class Database extends SQLiteOpenHelper {
                 + CATEGORY_NAME + " TEXT,"
                 + CATEGORY_IMAGE + " TEXT" + ")";
         db.execSQL(CREATE_CATEGORIES_TABLE);
+
         String CREATE_PRODUCTS_TABLE = "CREATE TABLE " + TABLE_PRODUCTS + "("
                 + KEY_PRODUCT_ID + " INTEGER PRIMARY KEY,"
                 + PRODUCT_CATEGORY_ID + " INTEGER,"
@@ -70,6 +105,56 @@ public class Database extends SQLiteOpenHelper {
             String INSERT_PRODUCT = "INSERT INTO " + TABLE_PRODUCTS + " (" + KEY_PRODUCT_ID + ", " + PRODUCT_CATEGORY_ID + ", " + PRODUCT_NAME + ", " + PRODUCT_IMAGE + ", " + PRODUCT_PRICE + ", " + PRODUCT_DETAIL + ") VALUES (" + product[0] + ", " + product[1] + ", '" + product[2] + "', '" + product[3] + "', " + product[4] + ", '" + product[5] + "')";
             db.execSQL(INSERT_PRODUCT);
         }
+
+        String CREATE_TABLE_ACCOUNT = "CREATE TABLE " + TABLE_ACCOUNT + "("
+                + KEY_ACCOUNT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + ACCOUNT_EMAIL + " TEXT,"
+                + ACCOUNT_USERNAME + " TEXT,"
+                + ACCOUNT_PASSWORD + " TEXT)";
+        db.execSQL(CREATE_TABLE_ACCOUNT);
+        // create 1 user test password 123
+        String testEmail = "test@example.com";
+        String testUsername = "test";
+        String testPassword = "123";
+
+        String INSERT_ACCOUNT = "INSERT INTO " + TABLE_ACCOUNT + " (" + ACCOUNT_EMAIL + ", " + ACCOUNT_USERNAME + ", " + ACCOUNT_PASSWORD + ") VALUES ('" + testEmail + "', '" + testUsername + "', '" + testPassword + "')";
+        db.execSQL(INSERT_ACCOUNT);
+
+        String CREATE_TABLE_ORDER = "CREATE TABLE " + TABLE_ORDER + "("
+                + KEY_ORDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + ORDER_ACCOUNT_ID + " INTEGER,"
+                + ORDER_ISPAYMENT + " INTEGER,"
+                + ORDER_TOTAL + " TEXT,"
+                + ORDER_PHONE + " TEXT,"
+                + ORDER_ADDRESS + " TEXT,"
+                + "FOREIGN KEY(" + ORDER_ACCOUNT_ID + ") REFERENCES " + TABLE_ACCOUNT + "(" + KEY_ACCOUNT_ID + ")" + ")";
+        db.execSQL(CREATE_TABLE_ORDER);
+
+        String CREATE_TABLE_ORDERITEM = "CREATE TABLE " + TABLE_ORDER_ITEM + "("
+                + KEY_ORDERITEM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + ORDERITEM_ORDER_ID + " INTEGER,"
+                + ORDERITEM_PRODUCT_ID + " INTEGER,"
+                + ORDERITEM_COUNT + " INTEGER,"
+                + ORDERITEM_PRICE + " TEXT,"
+                + "FOREIGN KEY(" + ORDERITEM_ORDER_ID + ") REFERENCES " + TABLE_ORDER + "(" + KEY_ORDER_ID + "),"
+                + "FOREIGN KEY(" + ORDERITEM_PRODUCT_ID + ") REFERENCES " + TABLE_PRODUCTS + "(" + KEY_PRODUCT_ID + ")" + ")";
+        db.execSQL(CREATE_TABLE_ORDERITEM);
+
+        String CREATE_TABLE_SESSION_SHOPPING = "CREATE TABLE " + TABLE_SESSION_SHOPPING + "("
+                + KEY_SESSION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + SESSION_USER_ID + " INTEGER,"
+                + SESSION_TOTAL + " TEXT,"
+                + "FOREIGN KEY(" + SESSION_USER_ID + ") REFERENCES " + TABLE_ACCOUNT + "(" + KEY_ACCOUNT_ID + ")" + ")";
+        db.execSQL(CREATE_TABLE_SESSION_SHOPPING);
+
+        String CREATE_TABLE_CART_ITEM = "CREATE TABLE " + TABLE_CART_ITEM + "("
+                + KEY_CART_ITEM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + CART_ITEM_PRODUCT_ID + " INTEGER,"
+                + CART_ITEM_COUNT + " INTEGER,"
+                + CART_SESSION_ID + " INTEGER,"
+                + "FOREIGN KEY(" + CART_ITEM_PRODUCT_ID + ") REFERENCES " + TABLE_PRODUCTS + "(" + KEY_PRODUCT_ID + "),"
+                + "FOREIGN KEY(" + CART_SESSION_ID + ") REFERENCES " + TABLE_SESSION_SHOPPING + "(" + KEY_SESSION_ID + ")" + ")";
+        db.execSQL(CREATE_TABLE_CART_ITEM);
     }
 
     @Override
@@ -124,5 +209,55 @@ public class Database extends SQLiteOpenHelper {
         }
         cursor.close();
         return products;
+    }
+    public boolean checkAccountIsExist(String username, String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_ACCOUNT + " WHERE " + ACCOUNT_USERNAME + " = '" + username + "' OR " + ACCOUNT_EMAIL + " = '" + email + "'", null);
+        if (cursor.moveToFirst()) {
+            return true;
+        }
+        return false;
+    }
+    public boolean createAccount(String username, String password, String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String INSERT_ACCOUNT = "INSERT INTO " + TABLE_ACCOUNT + " (" + ACCOUNT_EMAIL + ", " + ACCOUNT_USERNAME + ", " + ACCOUNT_PASSWORD + ") VALUES ('" + email + "', '" + username + "', '" + password + "')";
+        db.execSQL(INSERT_ACCOUNT);
+        return true;
+    }
+    public boolean checkAccount(String username, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_ACCOUNT + " WHERE " + ACCOUNT_USERNAME + " = '" + username + "' AND " + ACCOUNT_PASSWORD + " = '" + password + "'", null);
+        if (cursor.moveToFirst()) {
+            return true;
+        }
+        return false;
+    }
+    public int getAccountId(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + KEY_ACCOUNT_ID + " FROM " + TABLE_ACCOUNT + " WHERE " + ACCOUNT_USERNAME + " = '" + username + "'", null);
+        if (cursor.moveToFirst()) {
+            return cursor.getInt(0);
+        }
+        return -1;
+    }
+    public int getSessionID(String idUser){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + KEY_SESSION_ID + " FROM " + TABLE_SESSION_SHOPPING + " WHERE " + SESSION_USER_ID + " = '" + idUser + "'", null);
+        if (cursor.moveToFirst()) {
+            return cursor.getInt(0);
+        }
+        else{
+            String INSERT_SESSION = "INSERT INTO " + TABLE_SESSION_SHOPPING + " (" + SESSION_USER_ID + ", " + SESSION_TOTAL + ") VALUES ('" + idUser + "', '0')";
+            db.execSQL(INSERT_SESSION);
+            return getSessionID(idUser);
+        }
+    }
+    public String getName(String userID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + ACCOUNT_USERNAME + " FROM " + TABLE_ACCOUNT + " WHERE " + KEY_ACCOUNT_ID + " = '" + userID + "'", null);
+        if (cursor.moveToFirst()) {
+            return cursor.getString(0);
+        }
+        return "";
     }
 }

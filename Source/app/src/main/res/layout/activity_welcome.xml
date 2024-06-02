@@ -7,11 +7,11 @@
     tools:context=".WelcomeActivity">
 
     <ImageView
+        android:id="@+id/imv_welcome"
         android:foreground="@drawable/foreground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg4"></ImageView>
+        android:scaleType="centerCrop"></ImageView>
 
     <TextView
 

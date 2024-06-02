@@ -15,6 +15,7 @@ import java.util.List;
 import adapters.MenuAdapter;
 import adapters.ProductAdapter;
 import function.Database;
+import function.SessionManager;
 import model.Category;
 import model.Product;
 
@@ -23,7 +24,7 @@ public class ShowProductActivity extends AppCompatActivity {
     TextView seeAllProduct;
     RecyclerView productRecyclerView;
     EditText searchProduct;
-
+    TextView username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,12 @@ public class ShowProductActivity extends AppCompatActivity {
         // get from database and set to categoriesName
         setMenu();
         setProduct();
+        // set name
+        SessionManager sessionManager = new SessionManager(this);
+        String userId = sessionManager.getUserId();
+        String name = getName(userId);
+        username.setText(name);
+        // btn see all
         seeAllProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +48,7 @@ public class ShowProductActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // edit search
         searchProduct.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -55,12 +63,17 @@ public class ShowProductActivity extends AppCompatActivity {
         });
 
     }
-
+    private String getName(String userID) {
+        Database database = new Database(this);
+        String name = database.getName(userID);
+        return name;
+    }
     private void setInit() {
         menuRecyclerView = findViewById(R.id.recycler_menu_show_product);
         productRecyclerView = findViewById(R.id.recycler_product_show_product);
         seeAllProduct = findViewById(R.id.SeeAll_show_product);
         searchProduct = findViewById(R.id.edit_search_show_product);
+        username = findViewById(R.id.tv_name_user_show_product);
     }
 
     public void setMenu() {
