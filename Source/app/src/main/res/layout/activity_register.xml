@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:foreground="@drawable/foreground"
         android:scaleType="centerCrop"
-        android:src="@drawable/bg4"
+        android:src="@drawable/bg1"
         tools:layout_editor_absoluteX="27dp"
         tools:layout_editor_absoluteY="0dp"></ImageView>
 
@@ -22,7 +22,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My restaurant"
+        android:text="Mobile Store"
         android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
