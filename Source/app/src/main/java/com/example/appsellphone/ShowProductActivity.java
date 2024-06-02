@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class ShowProductActivity extends AppCompatActivity {
     RecyclerView menuRecyclerView;
     TextView seeAllProduct;
     RecyclerView productRecyclerView;
+    EditText searchProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,18 @@ public class ShowProductActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        searchProduct.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    Database database = new Database(ShowProductActivity.this);
+                    List<Product> products = database.searchProduct(searchProduct.getText().toString());
+                    Intent intent = new Intent(ShowProductActivity.this, SearchProduct.class);
+                    intent.putExtra("products", (java.io.Serializable) products);
+                    startActivity(intent);
+                }
+            }
+        });
 
     }
 
@@ -46,6 +60,7 @@ public class ShowProductActivity extends AppCompatActivity {
         menuRecyclerView = findViewById(R.id.recycler_menu_show_product);
         productRecyclerView = findViewById(R.id.recycler_product_show_product);
         seeAllProduct = findViewById(R.id.SeeAll_show_product);
+        searchProduct = findViewById(R.id.edit_search_show_product);
     }
 
     public void setMenu() {

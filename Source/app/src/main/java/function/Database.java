@@ -113,4 +113,16 @@ public class Database extends SQLiteOpenHelper {
         cursor.close();
         return products;
     }
+    public List<Product> searchProduct(String name) {
+        List<Product> products = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PRODUCTS + " WHERE " + PRODUCT_NAME + " LIKE '%" + name + "%'", null);
+        if (cursor.moveToFirst()) {
+            do {
+                products.add(new Product(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return products;
+    }
 }
