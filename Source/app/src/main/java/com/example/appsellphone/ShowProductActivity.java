@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.List;
@@ -17,17 +19,33 @@ import model.Product;
 
 public class ShowProductActivity extends AppCompatActivity {
     RecyclerView menuRecyclerView;
-    TextView textView;
+    TextView seeAllProduct;
     RecyclerView productRecyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_product);
-        menuRecyclerView = findViewById(R.id.recycler_menu_show_product);
-        productRecyclerView = findViewById(R.id.recycler_product_show_product);
+        setInit();
         // get from database and set to categoriesName
         setMenu();
         setProduct();
+        seeAllProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int idCategory = 0;
+                Intent intent = new Intent(ShowProductActivity.this, CategoryProduct.class);
+                intent.putExtra("idCategory", idCategory);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void setInit() {
+        menuRecyclerView = findViewById(R.id.recycler_menu_show_product);
+        productRecyclerView = findViewById(R.id.recycler_product_show_product);
+        seeAllProduct = findViewById(R.id.SeeAll_show_product);
     }
 
     public void setMenu() {

@@ -1,6 +1,7 @@
 package adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appsellphone.CategoryProduct;
 import com.example.appsellphone.R;
 
 import java.util.ArrayList;
@@ -44,6 +46,15 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         Category category = categories.get(position);
         // set src for imageButton
         holder.btn.setText(category.getName());
+        holder.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int idCategory = category.getId();
+                Intent intent = new Intent(context, CategoryProduct.class);
+                intent.putExtra("idCategory", idCategory);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

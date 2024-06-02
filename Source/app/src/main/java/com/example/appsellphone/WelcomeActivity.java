@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import function.Database;
+
 public class WelcomeActivity extends AppCompatActivity {
     Button button ;
     TextView textView;
@@ -15,7 +17,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
+        Database database = new Database(this);
         textView = findViewById(R.id.tv_sign_in);
         button = findViewById(R.id.bnt_dangki_welcome);
 

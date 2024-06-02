@@ -101,4 +101,16 @@ public class Database extends SQLiteOpenHelper {
         cursor.close();
         return products;
     }
+    public List<Product> getProductbyIdCategory(int idCategory) {
+        List<Product> products = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PRODUCTS + " WHERE " + PRODUCT_CATEGORY_ID + " = " + idCategory, null);
+        if (cursor.moveToFirst()) {
+            do {
+                products.add(new Product(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return products;
+    }
 }
