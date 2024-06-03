@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class ShowProductActivity extends AppCompatActivity {
     RecyclerView productRecyclerView;
     EditText searchProduct;
     TextView username;
+    LinearLayout btnHome, btnCart, btnProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +36,44 @@ public class ShowProductActivity extends AppCompatActivity {
         setMenu();
         setProduct();
         // set name
+        setWelcome();
+        // btn see all
+        setSeeAll();
+        // edit search
+        setSearchEddit();
+        // set btn home
+        setBtnHome();
+        // set btn cart
+        setBtnCart();
+
+    }
+
+    private void setBtnCart() {
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShowProductActivity.this, Cart.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void setBtnHome(){
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShowProductActivity.this, ShowProductActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    private void setWelcome(){
         SessionManager sessionManager = new SessionManager(this);
         String userId = sessionManager.getUserId();
         String name = getName(userId);
         username.setText(name);
-        // btn see all
+    }
+    private void setSeeAll(){
         seeAllProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +83,8 @@ public class ShowProductActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        // edit search
+    }
+    private void setSearchEddit(){
         searchProduct.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -61,7 +97,6 @@ public class ShowProductActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
     private String getName(String userID) {
         Database database = new Database(this);
@@ -74,6 +109,9 @@ public class ShowProductActivity extends AppCompatActivity {
         seeAllProduct = findViewById(R.id.SeeAll_show_product);
         searchProduct = findViewById(R.id.edit_search_show_product);
         username = findViewById(R.id.tv_name_user_show_product);
+        btnHome = findViewById(R.id.homeBtn);
+        btnCart = findViewById(R.id.cartBtn);
+        btnProfile = findViewById(R.id.profileBtn);
     }
 
     public void setMenu() {

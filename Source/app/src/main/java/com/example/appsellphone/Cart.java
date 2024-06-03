@@ -1,0 +1,89 @@
+package com.example.appsellphone;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
+
+import adapters.CartAdapter;
+import function.Database;
+import function.SessionManager;
+import model.CartItem;
+
+public class Cart extends AppCompatActivity implements CartAdapter.OnTotalPriceChangeListener{
+    RecyclerView recyclerView;
+    ImageView btnBack;
+    TextView totalCart;
+    EditText edtAddress, edtPhone;
+    AppCompatButton btnOrder;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cart);
+        setInit();
+        setBtnBack();
+        setRecycler();
+        setBtnOrder();
+    }
+
+    private void setBtnOrder() {
+        btnOrder.setOnClickListener(v -> {
+            Database db = new Database(this);
+            SessionManager sessionManager = new SessionManager(this);
+            String SessionID = sessionManager.getSessionId();
+            String address = edtAddress.getText().toString();
+            String phone = edtPhone.getText().toString();
+            if (address.isEmpty() || phone.isEmpty()){
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            db.order(SessionID, address, phone);
+            Toast.makeText(this, "Order successfully", Toast.LENGTH_SHORT).show();
+            finish();
+        });
+    }
+
+    private void setBtnBack() {
+        btnBack.setOnClickListener(v -> {
+            finish();
+        });
+    }
+
+    private void setRecycler() {
+        List<CartItem> list = getListCart();
+        CartAdapter adapter = new CartAdapter(list, this);
+        adapter.setOnTotalPriceChangeListener(this);
+        recyclerView.setAdapter(adapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        double totalPrice = adapter.calculateTotalPrice();
+        onTotalPriceChange(totalPrice);
+    }
+    @Override
+    public void onTotalPriceChange(double totalPrice) {
+        totalCart.setText(String.valueOf(totalPrice));
+    }
+    private void setInit() {
+        recyclerView = findViewById(R.id.recycler_cart);
+        btnBack = findViewById(R.id.backBtn);
+        totalCart = findViewById(R.id.tv_total_cart);
+        edtAddress = findViewById(R.id.edt_address);
+        edtPhone = findViewById(R.id.edt_phone_cart);
+        btnOrder = findViewById(R.id.button_order_cart);
+    }
+    private List<CartItem> getListCart(){
+        Database db = new Database(this);
+        SessionManager sessionManager = new SessionManager(this);
+        String SessionID = sessionManager.getSessionId();
+        return db.getCartItems(SessionID);
+    }
+}

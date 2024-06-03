@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.CartItem;
 import model.Category;
 import model.Product;
 
@@ -259,5 +260,92 @@ public class Database extends SQLiteOpenHelper {
             return cursor.getString(0);
         }
         return "";
+    }
+    public List<CartItem> getCartItems(String sessionID) {
+        List<CartItem> cartItems = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT ci." + KEY_CART_ITEM_ID + ", ci." + CART_ITEM_PRODUCT_ID + ", p." + PRODUCT_NAME + ", p." + PRODUCT_IMAGE + ", ci." + CART_ITEM_COUNT + ", p." + PRODUCT_PRICE +
+                " FROM " + TABLE_CART_ITEM + " ci " +
+                " JOIN " + TABLE_PRODUCTS + " p ON ci." + CART_ITEM_PRODUCT_ID + " = p." + KEY_PRODUCT_ID +
+                " WHERE ci." + CART_SESSION_ID + " = ?";
+
+        Cursor cursor = db.rawQuery(query, new String[]{sessionID});
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_CART_ITEM_ID));
+                int productId = cursor.getInt(cursor.getColumnIndexOrThrow(CART_ITEM_PRODUCT_ID));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow(PRODUCT_NAME));
+                String picUrl = cursor.getString(cursor.getColumnIndexOrThrow(PRODUCT_IMAGE));
+                int numberInCart = cursor.getInt(cursor.getColumnIndexOrThrow(CART_ITEM_COUNT));
+                double price = cursor.getDouble(cursor.getColumnIndexOrThrow(PRODUCT_PRICE));
+                double total = price * numberInCart;
+
+                CartItem cartItem = new CartItem(id, productId, title, picUrl, numberInCart, price, total);
+                cartItems.add(cartItem);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return cartItems;
+    }
+
+    public boolean checkHaveIteminCart(String sessionId, int productId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CART_ITEM + " WHERE " + CART_SESSION_ID + " = '" + sessionId + "' AND " + CART_ITEM_PRODUCT_ID + " = '" + productId + "'", null);
+        if (cursor.moveToFirst()) {
+            return true;
+        }
+        return false;
+
+    }
+
+    public void updateQuantity(String sessionId, int productId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_CART_ITEM + " SET " + CART_ITEM_COUNT + " = " + CART_ITEM_COUNT + " + 1 WHERE " + CART_SESSION_ID + " = ? AND " + CART_ITEM_PRODUCT_ID + " = ?";
+        db.execSQL(query, new String[]{sessionId, String.valueOf(productId)});
+    }
+
+    public void addToCart(String sessionId, int productId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "INSERT INTO " + TABLE_CART_ITEM + " (" + CART_ITEM_PRODUCT_ID + ", " + CART_ITEM_COUNT + ", " + CART_SESSION_ID + ") VALUES (?, 1, ?)";
+        db.execSQL(query, new String[]{String.valueOf(productId), sessionId});
+    }
+
+    public void updateCart(int id, int numberinCart) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_CART_ITEM + " SET " + CART_ITEM_COUNT + " = ? WHERE " + KEY_CART_ITEM_ID + " = ?";
+        db.execSQL(query, new String[]{String.valueOf(numberinCart), String.valueOf(id)});
+    }
+
+    public void deleteCart(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_CART_ITEM + " WHERE " + KEY_CART_ITEM_ID + " = ?";
+        db.execSQL(query, new String[]{String.valueOf(id)});
+    }
+
+    public void order(String sessionID, String address, String phone) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int accountId = Integer.parseInt(sessionID);
+        List<CartItem> cartItemLIst = getCartItems(sessionID);
+        String accountID = String.valueOf(getAccountId(sessionID));
+        double total = 0;
+        for (CartItem cartItem : cartItemLIst) {
+            total += cartItem.getTotal();
+        }
+        String INSERT_ORDER = "INSERT INTO " + TABLE_ORDER + " (" + ORDER_ACCOUNT_ID + ", " + ORDER_ISPAYMENT + ", " + ORDER_TOTAL + ", " + ORDER_PHONE + ", " + ORDER_ADDRESS + ") VALUES ('" + accountId + "', '0', '" + total + "', '" + phone + "', '" + address + "')";
+        db.execSQL(INSERT_ORDER);
+        Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
+        int orderID = 0;
+        if (cursor.moveToFirst()) {
+            orderID = cursor.getInt(0);
+        }
+        for (CartItem cartItem : cartItemLIst) {
+            String INSERT_ORDER_ITEM = "INSERT INTO " + TABLE_ORDER_ITEM + " (" + ORDERITEM_ORDER_ID + ", " + ORDERITEM_PRODUCT_ID + ", " + ORDERITEM_COUNT + ", " + ORDERITEM_PRICE + ") VALUES ('" + orderID + "', '" + cartItem.getProductId() + "', '" + cartItem.getNumberinCart() + "', '" + cartItem.getPrice() + "')";
+            db.execSQL(INSERT_ORDER_ITEM);
+        }
+        String DELETE_CART = "DELETE FROM " + TABLE_CART_ITEM + " WHERE " + CART_SESSION_ID + " = '" + sessionID + "'";
+        db.execSQL(DELETE_CART);
     }
 }
