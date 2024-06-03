@@ -8,7 +8,6 @@
 
     <ImageView
         android:id="@+id/imv_welcome"
-        android:foreground="@drawable/btn_cat_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
@@ -20,7 +19,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="280dp"
         android:text="My Phone Store"
-        android:textColor="@color/red"
+        android:textColor="@color/white"
         android:textSize="40sp"></TextView>
 
 
@@ -47,7 +46,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginBottom="50dp"
         android:text="Đăng nhập"
-        android:textColor="@color/red"
+        android:textColor="@color/white"
         android:textSize="20sp">
 
     </TextView>
