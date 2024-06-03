@@ -44,8 +44,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                    builder.setTitle("Error");
-                    builder.setMessage("Username or Password is wrong.");
+                    builder.setTitle("Lỗi đăng nhập");
+                    builder.setMessage("Tên tài khoản hoặc mật khẩu sai.");
                     builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

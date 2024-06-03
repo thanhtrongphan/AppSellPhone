@@ -44,12 +44,12 @@ public class DetailProduct extends AppCompatActivity {
                     // update quantity
                     Database db = new Database(DetailProduct.this);
                     db.updateQuantity(sessionId, productId);
-                    Toast.makeText(DetailProduct.this, "Add to cart successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailProduct.this, "Thêm giỏ hàng thành công", Toast.LENGTH_SHORT).show();
                 }else{
                     // add new item
                     Database db = new Database(DetailProduct.this);
                     db.addToCart(sessionId, productId);
-                    Toast.makeText(DetailProduct.this, "Add to cart successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailProduct.this, "Thêm giỏ hàng thành công", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -71,7 +71,7 @@ public class DetailProduct extends AppCompatActivity {
     public void setDetail(Product product) {
         titleTxt.setText(product.getName());
         descriptionTxt.setText(product.getDetail());
-        priceTxt.setText(product.getPrice());
+        priceTxt.setText(product.getPrice() + " VND");
         Picasso.get().load(product.getImage()).into(picItem);
         backBtn.setOnClickListener(v -> {
             finish();

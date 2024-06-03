@@ -348,4 +348,15 @@ public class Database extends SQLiteOpenHelper {
         String DELETE_CART = "DELETE FROM " + TABLE_CART_ITEM + " WHERE " + CART_SESSION_ID + " = '" + sessionID + "'";
         db.execSQL(DELETE_CART);
     }
+
+    public boolean checkHaveItem(String sessionID) {
+        // check if the cart is empty
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CART_ITEM + " WHERE " + CART_SESSION_ID + " = '" + sessionID + "'", null);
+        if (cursor.moveToFirst()) {
+            return true;
+        }
+        return false;
+
+    }
 }

@@ -45,7 +45,21 @@ public class ShowProductActivity extends AppCompatActivity {
         setBtnHome();
         // set btn cart
         setBtnCart();
+        // set btn profile
+        setBtnProfile();
 
+    }
+
+    private void setBtnProfile() {
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SessionManager sessionManager = new SessionManager(ShowProductActivity.this);
+                sessionManager.clearSession();
+                Intent intent = new Intent(ShowProductActivity.this, WelcomeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setBtnCart() {

@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/imv_welcome"
-        android:foreground="@drawable/foreground"
+        android:foreground="@drawable/btn_cat_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"></ImageView>
@@ -19,17 +19,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="280dp"
-        android:text="My restaurant"
-        android:textColor="@color/white"
+        android:text="My Phone Store"
+        android:textColor="@color/red"
         android:textSize="40sp"></TextView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Có công ăn vặt, có ngày lên cân"
-        android:textColor="@color/white"
-        android:textSize="20sp"></TextView>
 
     <Button
         android:id="@+id/bnt_dangki_welcome"
@@ -39,7 +32,7 @@
         android:layout_centerInParent="true"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="168dp"
         android:background="@drawable/bnt_design"
         android:padding="20dp"
         android:text="Đăng kí"></Button>
@@ -54,7 +47,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginBottom="50dp"
         android:text="Đăng nhập"
-        android:textColor="@color/white"
+        android:textColor="@color/red"
         android:textSize="20sp">
 
     </TextView>

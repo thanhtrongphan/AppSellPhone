@@ -12,7 +12,7 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:foreground="@drawable/foreground"
+        android:foreground="@drawable/btn_cat_background"
         android:scaleType="centerCrop"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
@@ -22,8 +22,8 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My restaurant"
-        android:textColor="@color/white"
+        android:text="My Phone Store"
+        android:textColor="@color/red"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Đăng nhập"
-        android:textColor="@color/white"
+        android:textColor="@color/red"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
         android:layout_marginTop="30dp"
         android:drawableLeft="@drawable/baseline_account_circle_24"
         android:drawablePadding="13dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:hint="Tên tài khoản"
         android:textColorHint="#918B8B"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,12 +76,13 @@
         android:drawablePadding="13dp"
         android:textColorHint="#918B8B"
         android:hint="Mật khẩu"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_fullname"
         app:layout_constraintWidth_percent=".8"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:inputType="textPassword">
 
     </EditText>
 
@@ -90,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bạn chưa có tài khoản?"
-        android:textColor="@color/white"
+        android:textColor="@color/red"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/txt_register"
         app:layout_constraintStart_toStartOf="parent"

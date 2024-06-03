@@ -75,15 +75,6 @@
                         android:textSize="23dp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/priceTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:text="$12"
-                        android:textColor="@color/black"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
                 </LinearLayout>
 
 
@@ -91,6 +82,15 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/priceTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="$12"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
             <TextView
                 android:id="@+id/descriptionTxt"
                 android:layout_width="match_parent"
@@ -116,7 +116,7 @@
                 android:background="@drawable/red_button_background"
                 android:layout_margin="16dp"
                 android:layout_height="wrap_content"
-                android:text="Buy now"
+                android:text="Thêm vào giỏ hàng"
                 style="@android:style/Widget.Button"
                 android:textSize="18sp"
                 android:textColor="@color/white"

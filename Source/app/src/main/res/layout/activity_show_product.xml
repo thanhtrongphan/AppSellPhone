@@ -31,7 +31,7 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Welcome"
+                    android:text="Xin chào"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,7 @@
                     android:id="@+id/tv_name_user_show_product"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Alex Dastjerdi"
+                    android:text="Phan Thanh Trọng"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -91,7 +91,7 @@
                 android:drawableStart="@drawable/search_icon"
                 android:drawablePadding="8dp"
                 android:ems="10"
-                android:hint="Search anything"
+                android:hint="Tìm kiếm sản phẩm"
                 android:inputType="text"
                 android:padding="8dp" />
 
@@ -126,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:text="Discount 20% For
+                        android:text="Giảm 5% cho
 \nSamsung!"
                         android:textColor="@color/white"
                         android:textSize="25sp"
@@ -142,7 +142,7 @@
                     android:layout_height="30dp"
                     android:background="@drawable/orange_button_background"
                     android:gravity="center"
-                    android:text="Buy now"
+                    android:text="Mua bây giờ"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
@@ -156,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                android:text="Explore popular categories"
+                android:text="Danh sách loại điện thoại"
                 android:textColor="@color/black"
                 android:textSize="19sp"
                 android:textStyle="bold" />
@@ -186,7 +186,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Popular Product"
+                    android:text="Danh sách sản phẩm"
                     android:textColor="@color/black"
                     android:textSize="19sp"
                     android:textStyle="bold" />
@@ -195,7 +195,7 @@
                     android:id="@+id/SeeAll_show_product"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="See all"
+                    android:text="Xem tất cả"
                     android:textColor="@color/red" />
             </LinearLayout>
 
@@ -248,7 +248,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Explorer"
+                        android:text="Trang chủ"
                         android:textAlignment="center"
                         android:textColor="@color/red" />
                 </LinearLayout>
@@ -295,7 +295,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="cart"
+                        android:text="Giỏ hàng"
                         android:textAlignment="center"
                         android:textColor="#959595" />
                 </LinearLayout>
@@ -319,7 +319,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Profile"
+                        android:text="Thông tin"
                         android:textAlignment="center"
                         android:textColor="#959595" />
                 </LinearLayout>

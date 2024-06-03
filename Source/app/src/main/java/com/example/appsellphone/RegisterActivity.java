@@ -38,8 +38,8 @@ public class RegisterActivity extends AppCompatActivity {
         if(checkAccountIsExist(user, mail)){
             // Nếu tài khoản đã tồn tại
             AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-            builder.setTitle("Error");
-            builder.setMessage("Username or email is exist.");
+            builder.setTitle("Lỗi đăng ký");
+            builder.setMessage("Tài khoản hoặc email đã tồn tại.");
             builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

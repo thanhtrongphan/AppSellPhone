@@ -46,7 +46,7 @@
         android:text="$0"
         android:textColor="@color/red"
 
-        android:textSize="18sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/view7"
         app:layout_constraintStart_toStartOf="@+id/titleTxt" />
 
@@ -54,13 +54,15 @@
         android:id="@+id/totalEachItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:text="$0"
-        android:textStyle="bold"
-        android:textSize="18sp"
         android:textColor="@color/red"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/titleTxt" />
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/feeEachItem"
+        app:layout_constraintStart_toEndOf="@+id/view7"
+        app:layout_constraintTop_toBottomOf="@+id/titleTxt"
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="100dp"

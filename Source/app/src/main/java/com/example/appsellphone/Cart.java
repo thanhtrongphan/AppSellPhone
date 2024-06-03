@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import adapters.CartAdapter;
@@ -43,11 +44,16 @@ public class Cart extends AppCompatActivity implements CartAdapter.OnTotalPriceC
             String address = edtAddress.getText().toString();
             String phone = edtPhone.getText().toString();
             if (address.isEmpty() || phone.isEmpty()){
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Xin nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(!db.checkHaveItem(SessionID))
+            {
+                Toast.makeText(this, "Giỏ hàng không có sản phẩm", Toast.LENGTH_SHORT).show();
                 return;
             }
             db.order(SessionID, address, phone);
-            Toast.makeText(this, "Order successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
             finish();
         });
     }
@@ -70,7 +76,9 @@ public class Cart extends AppCompatActivity implements CartAdapter.OnTotalPriceC
     }
     @Override
     public void onTotalPriceChange(double totalPrice) {
-        totalCart.setText(String.valueOf(totalPrice));
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        String formattedTotalPrice = decimalFormat.format(totalPrice);
+        totalCart.setText(formattedTotalPrice + " VND");
     }
     private void setInit() {
         recyclerView = findViewById(R.id.recycler_cart);

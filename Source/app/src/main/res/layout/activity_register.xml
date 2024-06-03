@@ -12,7 +12,7 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:foreground="@drawable/foreground"
+        android:foreground="@drawable/btn_cat_background"
         android:scaleType="centerCrop"
         tools:layout_editor_absoluteX="27dp"
         tools:layout_editor_absoluteY="0dp"></ImageView>
@@ -21,8 +21,8 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My restaurant"
-        android:textColor="@color/white"
+        android:text="My Phone Store"
+        android:textColor="@color/red"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Đăng kí"
-        android:textColor="@color/white"
+        android:textColor="@color/red"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
         android:id="@+id/edt_fullname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_marginTop="30dp"
         android:drawableLeft="@drawable/baseline_account_circle_24"
         android:drawablePadding="13dp"
@@ -79,7 +79,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_fullname"
         app:layout_constraintWidth_percent=".8"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         tools:ignore="MissingConstraints"></EditText>
 
 
@@ -92,12 +92,13 @@
         android:hint="Mật khẩu"
         android:layout_marginTop="10dp"
         android:textColorHint="#918B8B"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_email"
         app:layout_constraintWidth_percent=".8"
-        tools:ignore="MissingConstraints"></EditText>
+        tools:ignore="MissingConstraints"
+        android:inputType="textPassword"></EditText>
 
     <Button
         android:id="@+id/bnt_register"
@@ -108,8 +109,10 @@
         android:text="Đăng kí"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_password"
+        app:layout_constraintVertical_bias="0.193"
         app:layout_constraintWidth_percent="0.8"
         tools:ignore="MissingConstraints">
 
@@ -120,7 +123,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bạn đã có tài khoản?"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/text_signin"
         app:layout_constraintStart_toStartOf="parent"

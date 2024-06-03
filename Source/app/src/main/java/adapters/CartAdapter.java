@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appsellphone.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import function.Database;
@@ -38,8 +39,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.title.setText(cartItemList.get(position).getTitle());
-        holder.feeEachItem.setText(cartItemList.get(position).getPrice() + "VND");
-        Double totaleach = cartItemList.get(position).getNumberinCart() * cartItemList.get(position).getPrice();
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        String formattedPrice = decimalFormat.format(cartItemList.get(position).getPrice());
+        holder.feeEachItem.setText(formattedPrice + " VND");
         holder.totalEachItem.setText( Math.round((cartItemList.get(position).getNumberinCart() * cartItemList.get(position).getPrice())) + "VND");
         holder.num.setText(String.valueOf(cartItemList.get(position).getNumberinCart()));
         Picasso.get().load(cartItemList.get(position).getPicUrl()).into(holder.pic);
