@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         android:foreground="@drawable/btn_cat_background"
         android:scaleType="centerCrop"
+        android:src="@drawable/bg1"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
     </ImageView>
