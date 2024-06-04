@@ -10,6 +10,8 @@ import java.util.List;
 
 import model.CartItem;
 import model.Category;
+import model.Order;
+import model.OrderItem;
 import model.Product;
 
 public class Database extends SQLiteOpenHelper {
@@ -325,16 +327,15 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL(query, new String[]{String.valueOf(id)});
     }
 
-    public void order(String sessionID, String address, String phone) {
+    public void order(String accountID, String sessionID, String address, String phone) {
         SQLiteDatabase db = this.getWritableDatabase();
-        int accountId = Integer.parseInt(sessionID);
         List<CartItem> cartItemLIst = getCartItems(sessionID);
-        String accountID = String.valueOf(getAccountId(sessionID));
+        int accountIDint = Integer.parseInt(accountID);
         double total = 0;
         for (CartItem cartItem : cartItemLIst) {
             total += cartItem.getTotal();
         }
-        String INSERT_ORDER = "INSERT INTO " + TABLE_ORDER + " (" + ORDER_ACCOUNT_ID + ", " + ORDER_ISPAYMENT + ", " + ORDER_TOTAL + ", " + ORDER_PHONE + ", " + ORDER_ADDRESS + ") VALUES ('" + accountId + "', '0', '" + total + "', '" + phone + "', '" + address + "')";
+        String INSERT_ORDER = "INSERT INTO " + TABLE_ORDER + " (" + ORDER_ACCOUNT_ID + ", " + ORDER_ISPAYMENT + ", " + ORDER_TOTAL + ", " + ORDER_PHONE + ", " + ORDER_ADDRESS + ") VALUES ('" + accountIDint + "', '0', '" + total + "', '" + phone + "', '" + address + "')";
         db.execSQL(INSERT_ORDER);
         Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
         int orderID = 0;
@@ -358,5 +359,39 @@ public class Database extends SQLiteOpenHelper {
         }
         return false;
 
+    }
+
+    public List<Order> getListOrder(String accountID) {
+        List<Order> orders = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_ORDER + " WHERE " + ORDER_ACCOUNT_ID + " = '" + accountID + "'", null);
+        if (cursor.moveToFirst()) {
+            do {
+                orders.add(new Order(cursor.getInt(0), cursor.getString(3), cursor.getString(4), cursor.getString(5)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return orders;
+    }
+
+    public List<OrderItem> getListOrderItem(int orderID) {
+        List<OrderItem> orderItems = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT oi." + ORDERITEM_PRODUCT_ID + ", p." + PRODUCT_NAME + ", p." + PRODUCT_IMAGE + ", oi." + ORDERITEM_COUNT + ", oi." + ORDERITEM_PRICE +
+                " FROM " + TABLE_ORDER_ITEM + " oi " +
+                " JOIN " + TABLE_PRODUCTS + " p ON oi." + ORDERITEM_PRODUCT_ID + " = p." + KEY_PRODUCT_ID +
+                " WHERE oi." + ORDERITEM_ORDER_ID + " = ?", new String[]{String.valueOf(orderID)});
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(1);
+                String urlImage = cursor.getString(2);
+                int number = cursor.getInt(3);
+                String price = cursor.getString(4);
+                String total = String.valueOf(number * Double.parseDouble(price));
+                orderItems.add(new OrderItem(name, urlImage, number, price, total));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return orderItems;
     }
 }

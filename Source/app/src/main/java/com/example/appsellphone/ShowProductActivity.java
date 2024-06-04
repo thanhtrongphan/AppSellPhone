@@ -54,9 +54,7 @@ public class ShowProductActivity extends AppCompatActivity {
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SessionManager sessionManager = new SessionManager(ShowProductActivity.this);
-                sessionManager.clearSession();
-                Intent intent = new Intent(ShowProductActivity.this, WelcomeActivity.class);
+                Intent intent = new Intent(ShowProductActivity.this, InfomationActivity.class);
                 startActivity(intent);
             }
         });

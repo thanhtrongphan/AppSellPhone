@@ -52,7 +52,8 @@ public class Cart extends AppCompatActivity implements CartAdapter.OnTotalPriceC
                 Toast.makeText(this, "Giỏ hàng không có sản phẩm", Toast.LENGTH_SHORT).show();
                 return;
             }
-            db.order(SessionID, address, phone);
+            String AccountID = sessionManager.getUserId();
+            db.order(AccountID, SessionID, address, phone);
             Toast.makeText(this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
             finish();
         });
